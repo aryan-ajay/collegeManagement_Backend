@@ -1,4 +1,4 @@
-package com.avit.collegemanagementsystem.service.User;
+package com.avit.collegemanagementsystem.security;
 
 import com.avit.collegemanagementsystem.service.User.interfaces.StudentProfileService;
 

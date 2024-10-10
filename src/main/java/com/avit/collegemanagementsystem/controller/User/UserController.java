@@ -1,7 +1,7 @@
 package com.avit.collegemanagementsystem.controller.User;
 
 import com.avit.collegemanagementsystem.model.User.User;
-import com.avit.collegemanagementsystem.service.User.UserServiceImpl;
+import com.avit.collegemanagementsystem.security.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
