@@ -1,5 +1,6 @@
 package com.avit.collegemanagementsystem.security.response;
 
+import com.avit.collegemanagementsystem.model.Faculty.FacultyProfile;
 import com.avit.collegemanagementsystem.model.User.StudentProfile;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.FetchType;
@@ -23,6 +24,9 @@ public class UserInfoResponse {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private StudentProfile profile;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private FacultyProfile facultyProfile;
+
     public UserInfoResponse(Long  id, String username, List<String> roles, String jwtToken, String message) {
         this.id = id;
         this.username = username;
@@ -41,6 +45,12 @@ public class UserInfoResponse {
         this.roles = roles;
         this.message = loginSuccessful;
         this.profile = profile;
+    }
 
+    public UserInfoResponse(Long id, List<String> roles, String loginSuccessful, FacultyProfile profile) {
+        this.id = id;
+        this.roles = roles;
+        this.message = loginSuccessful;
+        this.facultyProfile = profile;
     }
 }

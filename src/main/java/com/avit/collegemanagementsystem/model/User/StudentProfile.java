@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.Date;
 
@@ -22,6 +23,7 @@ public class StudentProfile {
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference // This prevents infinite loop by ignoring this reference
+    @ToString.Exclude
     private User user;
 
     @Column(name = "full_name", nullable = false)

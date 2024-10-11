@@ -20,5 +20,9 @@ public class Department {
 
     private String description;
 
+    public Department(String cse, String computerScienceAndEngineering) {
+        this.name = cse;
+        this.description = computerScienceAndEngineering;
+    }
 }
 

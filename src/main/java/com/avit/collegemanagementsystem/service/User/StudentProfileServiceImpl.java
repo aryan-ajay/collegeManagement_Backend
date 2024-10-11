@@ -1,9 +1,8 @@
-package com.avit.collegemanagementsystem.security;
-
-import com.avit.collegemanagementsystem.service.User.interfaces.StudentProfileService;
+package com.avit.collegemanagementsystem.service.User;
 
 import com.avit.collegemanagementsystem.model.User.StudentProfile;
 import com.avit.collegemanagementsystem.repository.User.StudentProfileRepository;
+import com.avit.collegemanagementsystem.service.User.interfaces.StudentProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

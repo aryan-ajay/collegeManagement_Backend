@@ -1,5 +1,6 @@
 package com.avit.collegemanagementsystem.security.jwt;
 
+import com.avit.collegemanagementsystem.security.services.FacultyDetailsServiceImpl;
 import com.avit.collegemanagementsystem.security.services.UserDetailsServiceImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
@@ -26,6 +27,9 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
+
+    @Autowired
+    private FacultyDetailsServiceImpl facultyDetailsService;
 
     private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
 
@@ -59,12 +63,19 @@ public class AuthTokenFilter extends OncePerRequestFilter {
                 if (jwtResponse.isValid()) {
                     String username = jwtUtils.getUserNameFromJwtToken(jwt);
                     UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                    UserDetails facultyDetails = facultyDetailsService.loadUserByUsername(username);
 
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                             userDetails, null, userDetails.getAuthorities());
+
+                    UsernamePasswordAuthenticationToken authentication2 = new UsernamePasswordAuthenticationToken(
+                            facultyDetails, null, facultyDetails.getAuthorities());
+
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    authentication2.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                     SecurityContextHolder.getContext().setAuthentication(authentication);
+                    SecurityContextHolder.getContext().setAuthentication(authentication2);
                 } else if ("JWT token is expired".equals(jwtResponse.getMessage())) {
                     logger.error("JWT token is expired");
                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "JWT token is expired");
